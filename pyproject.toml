@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cat purr"
+dynamic = ["version"]
+authors = [
+  { name="Frederic Macabiau", email="superfred2468@gmail.com" }
+]
+maintainers = [
+  { name="Frederic Macabiau", email="superfred2468@gmail.com" }
+]
+description = "Un gestionnaire de framework"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent"
+]
+#all depedencies of your project
+dependencies = [
+  "requests",
+  "numpy",
+  "cowsay",
+  "pickle-mixin",
+  "docker",
+]
+
+#project repository
+[project.urls]
+Homepage = https://github.com/entrezunfredici/cat_purr_init_framework_package"
+
+[project.scripts]
+# alias = "purr: " 
+purr = "purr:cli"
+
+[tool.setuptools.dynamic]
+version = {attr = "sudokeys.__version__"}
