@@ -4,5 +4,9 @@ __pycache__/
 /.venv
 /.pytest_cache
 
+# mypy
+*.egg-info
+*.egg
+
 # saves
 *.pkl
