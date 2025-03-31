@@ -32,7 +32,6 @@ class SaveFile():
         return False
 
     def delete_data(self, del_datas):
-        """Supprime le fichier de données si il existe."""
         if os.path.exists(self.file_name):
             with open(self.file_name, "rb") as f:
                 datas = pickle.load(f)
@@ -43,7 +42,6 @@ class SaveFile():
             return True
         return False
 
-    def delete_file(self):
-        """Supprime le fichier de données si il existe."""
+    def __del__(self):
         if os.path.exists(self.file_name):
             os.remove(self.file_name)
