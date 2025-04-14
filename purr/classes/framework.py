@@ -39,4 +39,4 @@ class Framework():
         subprocess.run("git clone "+self.repository, shell=True, text=True)
 
     def __del__(self):
-        print(f"Framework {self.name} supprimé")
+        print(f"Framework class  {self.name} deleted")

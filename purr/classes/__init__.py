@@ -1,3 +1,3 @@
-from .framework import framework
-from .architecture import architecture
+from .framework import Framework
+from .architecture import Architecture
 

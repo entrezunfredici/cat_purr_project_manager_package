@@ -1,4 +1,6 @@
 import inquirer
+from purr.classes import *
+from purr.utils import *
 
 config_infos = {
     "mvc": {
@@ -22,21 +24,24 @@ config_infos = {
 }
 
 def init_project():
-    project_architecture = [
-        inquirer.List('Project architecture',
-                message="What project architecture do you need?",
-                choices=config_infos.keys(),
-            ),
-    ]
-    architecture_choosen = config_infos[inquirer.prompt(project_architecture)]
+    #Choose project architecture
+    architecture_choosen = selector(
+        'Project architecture',
+        'What project architecture do you need?',
+        config_infos
+    )
     for layer in architecture_choosen.keys():
-        print(layer)
-        framework_languages = [
-            inquirer.List('Framework language',
-                message="What language do you need?",
-                choices=architecture_choosen[layer].keys(),
-            ),
-        ]
-        language_choosen = architecture_choosen[inquirer.prompt(framework_languages)]
-        framework 
+        #Choose main languages
+        language_choosen = selector(
+            'Framework language',
+            'What language do you need?',
+            architecture_choosen[layer]
+        )
+        #choose framework
+        framewor_choosen = selector(
+            'Framework',
+            'What framework do you need?',
+            architecture_choosen[layer[language_choosen]]
+        )
+
 

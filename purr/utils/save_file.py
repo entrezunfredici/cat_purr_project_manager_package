@@ -42,6 +42,10 @@ class SaveFile():
             return True
         return False
 
-    def __del__(self):
+    def delete_file(self):
         if os.path.exists(self.file_name):
             os.remove(self.file_name)
+        self.__del__()
+
+    def __del__(self):
+        print(f"close {self.file_name} file")
