@@ -1,9 +1,9 @@
 from .framework import Framework
 
 class Architecture():
-    def __init__(self, architecture_name, architecture_framework_list):
+    def __init__(self, architecture_name, architecture_framework_dict):
         self.name = architecture_name
-        for framework_info in architecture_framework_list:
+        for framework_info in architecture_framework_dict:
             self.framework_dict = Framework(
                 framework_info["name"],
                 framework_info["language"],
@@ -18,4 +18,6 @@ class Architecture():
         self.framework_dict[layer_name] = Framework(framework_name, framework_language, framework_description, framework_repo)
 
     def __del__(self):
+        for framework in self.framework_dict:
+            framework.__del__()
         print(f"Architecture  {self.name} deleted")
