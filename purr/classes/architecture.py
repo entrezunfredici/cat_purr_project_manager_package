@@ -3,13 +3,14 @@ from .framework import Framework
 class Architecture():
     def __init__(self, architecture_name, architecture_framework_dict):
         self.name = architecture_name
-        for framework_info in architecture_framework_dict:
-            self.framework_dict = Framework(
-                framework_info["name"],
-                framework_info["language"],
-                framework_info["description"],
-                framework_info["repository"]
-            )
+        for category in architecture_framework_dict.keys():
+            for framework_info in architecture_framework_dict[category]:
+                self.framework_dict = Framework(
+                    framework_info["name"],
+                    framework_info["language"],
+                    framework_info["description"],
+                    framework_info["repository"]
+                )
 
     def get_framework_by_achitecture_layer(self, name):
         return self.framework_dict[name]

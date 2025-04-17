@@ -37,11 +37,12 @@ def config():
             language = selector(
                 'language selector',
                 'Which language choosen?',
-                configuration["languages"]
+                langage_list
             )
             configuration["frameworks"].append(
                 Framework(
                     infos["name"],
+                    language,
                     infos["description"],
                     infos["repository"]
                 )
@@ -57,7 +58,8 @@ def config():
 def get_infos(info_list):
     dict = {}
     for info in info_list:
-        dict[info] = input("What's your %s?" % info)
+        dict[info] = input("Enter %s?" % info)
+    return dict
 
 def get_config():
     return
