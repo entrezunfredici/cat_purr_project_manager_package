@@ -25,6 +25,7 @@ dependencies = [
   "cowsay",
   "pickle-mixin",
   "docker",
+  "questionary"
 ]
 
 [project.urls]

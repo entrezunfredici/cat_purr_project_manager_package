@@ -11,10 +11,10 @@ def config():
     }
     json_langages = requests.get("https://api.github.com/languages").json()
     langage_dict = {}
-    # save = SaveFile(
-    #     "config_file",
-    #     {}
-    # )
+    save = SaveFile(
+        "config_file",
+        {}
+    )
     for language in json_langages:
         if language not in langage_dict:
             langage_dict[language["name"]]=language["name"]
