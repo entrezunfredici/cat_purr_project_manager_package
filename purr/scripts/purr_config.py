@@ -10,23 +10,28 @@ def config():
         "create framework": "framework",
         "exit": "exit"
     }
-    json_langages = requests.get("https://api.github.com/languages").json()
-    langage_dict = {}
+
     save = SaveFile(
         "config_file",
         {}
     )
-    
-    for language in json_langages:
-        print(language["name"])
-        langage_dict[language["name"]]=language["name"]
+
+    langage_dict = {}
+    try:
+        json_langages = requests.get("https://api.github.com/languages").json()
+        for language in json_langages:
+            langage_dict[language["name"]]=language["name"]
+    except:
+        print("fail to connect github api")
+        langage_dict = save.read_data(["languages"])
 
     configuration = {
-        "architectures": [],
-        "layers": [],
-        "frameworks": [],
+        "architectures": save.read_data(["architectures"]),
+        "layers": save.read_data(["layers"]),
+        "frameworks": save.read_data(["frameworks"]),
         "languages": langage_dict
     }
+    print(configuration)
     match selector(
         'config selector',
         'What configuration do you want to do?',
@@ -38,7 +43,7 @@ def config():
                 "Choose yours layers :",
                 choices=configuration["layers"]
             ).ask()
-            configuration["architectures"]=(
+            configuration["architectures"][infos["name"]] = (
                 Architecture(
                     infos["name"],
                     layer_list
@@ -50,7 +55,7 @@ def config():
                 "Choose yours frameworks :",
                 choices=configuration["frameworks"]
             ).ask()
-            configuration["layers"]=(
+            configuration["layers"][infos["name"]] = (
                 Architecture(
                     infos["name"],
                     framework_list
@@ -63,7 +68,7 @@ def config():
                 'Which language choosen?',
                 langage_dict
             )
-            configuration["frameworks"]=(
+            configuration["frameworks"][infos["name"]] = (
                 Framework(
                     infos["name"],
                     language,
@@ -73,6 +78,7 @@ def config():
             )
         case _:
             return
+    save.save_data(configuration)
     config()
 
 def get_infos(info_list):
