@@ -11,7 +11,7 @@ def config():
     json_langages = requests.get("https://api.github.com/languages").json()
     langage_list = []
     for language in json_langages:
-        if language["name"] not in langage_list:
+        if language not in langage_list:
             langage_list.append(language["name"])
 
     configuration = {
@@ -26,7 +26,7 @@ def config():
     ):
         case "architerture":
             infos = get_infos(["name"])
-            configuration["architectures"].append(
+            configuration["architectures"]=(
                 Architecture(
                     infos["name"],
                     {}
@@ -39,7 +39,7 @@ def config():
                 'Which language choosen?',
                 langage_list
             )
-            configuration["frameworks"].append(
+            configuration["frameworks"]=(
                 Framework(
                     infos["name"],
                     language,
