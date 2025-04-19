@@ -5,13 +5,14 @@ import requests
 
 def config():
     config_choises = {
-        "create architecture": "architerture",
-        "create layer": "layer",
+        "set workspace": "workspace",
         "create framework": "framework",
+        "create layer": "layer",
+        "create architecture": "architerture",
         "exit": "exit"
     }
 
-    save = SaveFile(
+    config_save = SaveFile(
         "config_file",
         {}
     )
@@ -23,9 +24,9 @@ def config():
             langage_dict[language["name"]]=language["name"]
     except:
         print("fail to connect github api")
-        langage_dict = save.read_data(["languages"])
+        langage_dict = config_save.read_data(["languages"])
 
-    configuration = save.read_data(["architectures","layers","frameworks"])
+    configuration = config_save.read_data(["architectures","layers","frameworks"])
     configuration ["languages"] = langage_dict
     match selector(
         'config selector',
@@ -71,9 +72,11 @@ def config():
                     infos["repository"]
                 )
             )
+        case "workspace":
+            configuration ["workspace"] = get_infos(["workspace path"])
         case _:
             return
-    save.save_data(configuration)
+    config_save.save_data(configuration)
     config()
 
 def get_infos(info_list):
@@ -81,8 +84,3 @@ def get_infos(info_list):
     for info in info_list:
         dict[info] = input("Enter %s?" % info)
     return dict
-
-def get_config():
-    return
-
-

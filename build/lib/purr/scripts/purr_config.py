@@ -11,7 +11,7 @@ def config():
         "exit": "exit"
     }
 
-    save = SaveFile(
+    config_save = SaveFile(
         "config_file",
         {}
     )
@@ -23,11 +23,11 @@ def config():
             langage_dict[language["name"]]=language["name"]
     except:
         print("fail to connect github api")
-        langage_dict = save.read_data(["languages"])
+        langage_dict = config_save.read_data(["languages"])
 
-    configuration = save.read_data(["architectures","layers","frameworks"])
+    configuration = config_save.read_data(["architectures","layers","frameworks"])
     configuration ["languages"] = langage_dict
-    print(configuration)
+    configuration ["workspace"] = get_infos(["workspace path"])
     match selector(
         'config selector',
         'What configuration do you want to do?',
@@ -74,7 +74,7 @@ def config():
             )
         case _:
             return
-    save.save_data(configuration)
+    config_save.save_data(configuration)
     config()
 
 def get_infos(info_list):
