@@ -10,13 +10,13 @@ class SaveFile():
         else:
             self.save_data(data)
 
-    def read_data(self, key):
-        datas = False
+    def read_data(self, keys):
+        datas = {}
         if os.path.exists(self.file_name):
             with open(self.file_name, "rb") as f:
                 file_datas = pickle.load(f)
-            if key in file_datas:
-                datas = file_datas[key]  # Ou une valeur par défaut
+            for key in keys:
+                datas[key] = file_datas.get(key, {})
             return datas
         else:
             return {"error":"file doesn't exist"}

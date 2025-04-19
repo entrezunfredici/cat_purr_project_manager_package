@@ -25,13 +25,8 @@ def config():
         print("fail to connect github api")
         langage_dict = save.read_data(["languages"])
 
-    configuration = {
-        "architectures": save.read_data(["architectures"]),
-        "layers": save.read_data(["layers"]),
-        "frameworks": save.read_data(["frameworks"]),
-        "languages": langage_dict
-    }
-    print(configuration)
+    configuration = save.read_data(["architectures","layers","frameworks"])
+    configuration ["languages"] = langage_dict
     match selector(
         'config selector',
         'What configuration do you want to do?',

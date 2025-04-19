@@ -16,8 +16,7 @@ class SaveFile():
             with open(self.file_name, "rb") as f:
                 file_datas = pickle.load(f)
             for key in keys:
-                if key in file_datas:
-                    datas[key] = file_datas[key]  # Ou une valeur par défaut
+                datas[key] = file_datas.get(key, {})
             return datas
         else:
             return {"error":"file doesn't exist"}
