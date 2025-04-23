@@ -25,11 +25,13 @@ def init_project(project_name):
             if framework.get_language() == language_choosen:
                 framework_dict[framework.get_name()] = framework
         #choose framework
-        framewor_choosen = selector(
+        framework_choosen = selector(
             'Framework',
             'What framework do you need?',
             framework_dict
         )
+        repository = framework_choosen.get_repository()
+        
 
 
 
